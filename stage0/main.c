@@ -5,6 +5,8 @@
 
 #define M_PI 3.14159265358979323846
 
+const int BENCHMARK = 0;
+
 int N;
 int Np;
 int K;
@@ -19,6 +21,8 @@ double at;
 double *u_prev; // u^{n-1}
 double *u_curr; // u^n
 double *u_next; // u^{n+1}
+
+double *error_history = NULL;
 
 double u_analytical(double x, double y, double z, double t) {
     double result = sin(M_PI * x / Lx) * sin(M_PI * y / Ly) * 
@@ -133,6 +137,74 @@ void solve() {
         
         printf("Iter %d\n", n);
     }
+}
+
+void solve_with_error() {
+    init();
+
+    error_history = (double*)malloc(K * sizeof(double));
+
+    for(int n = 1; n < K; n++) {
+#pragma omp parallel for collapse(3) schedule(static)
+        for(int i = 1; i < N; ++i) {
+            for(int j = 1; j < N; ++j) {
+                for(int k = 1; k < N; ++k) {
+                    double lap = laplacian(u_curr, i, j, k);
+                    int idx = get_index(i, j, k);
+                    u_next[idx] = 2.0 * u_curr[idx] - u_prev[idx] + a2 * tau * tau * lap;
+                }
+            }
+        }
+
+        boundary_conditions(u_next);
+
+        double *temp = u_prev;
+        u_prev = u_curr;
+        u_curr = u_next;
+        u_next = temp;
+
+        /* get error at current time step */
+        double max_error = 0.0;
+        double t_current = n * tau;
+
+#pragma omp parallel for collapse(3) reduction(max:max_error)
+        for(int i = 0; i <= N; ++i) {
+            for(int j = 0; j <= N; ++j) {
+                for(int k = 0; k <= N; ++k) {
+                    double x = i * hx;
+                    double y = j * hy;
+                    double z = k * hz;
+                    double u_exact = u_analytical(x, y, z, t_current);
+                    double error = fabs(u_curr[get_index(i, j, k)] - u_exact);
+                    if(error > max_error) max_error = error;
+                }
+            }
+        }
+
+        error_history[n] = max_error;
+
+        if((n+1) % 5 == 0 || n+1 == K) {
+            printf("Iter %d/%d, Error: %.6e\n", n+1, K, max_error);
+        }
+    }
+}
+
+void save_error_history(const char *filename) {
+    if (!error_history) return;
+
+    FILE *f = fopen(filename, "w");
+    if (!f) {
+        printf("Error: cannot open %s for writing\n", filename);
+        return;
+    }
+
+    fprintf(f, "# time_step\ttime\terror\n");
+    for(int n = 0; n < K; n++) {
+        fprintf(f, "%d\t%.6f\t%.6e\n", n, n*tau, error_history[n]);
+    }
+
+    fclose(f);
+    printf("history saved to %s\n", filename);
 }
 
 double compute_error() {
@@ -266,20 +338,32 @@ int main(int argc, char *argv[]) {
         u_next[i] = 0.0;
     }
 
-    printf("+++++ Timer start +++++ \n");
-    double start_time = omp_get_wtime();
-    solve();
-    double end_time = omp_get_wtime();
-    printf("+++++ Time end +++++ \n");
-    double time_elapsed = end_time - start_time;
-    printf("Solution time: %.6f\n", time_elapsed);
+    const char file_name[] = "error_history.txt";
 
-    /* error compute */
-    double error = compute_error();
-    printf("Error: %.6f\n", error);
+    if (BENCHMARK) {
+        printf("+++++ Timer start +++++ \n");
+        double start_time = omp_get_wtime();
+        solve();
+        double end_time = omp_get_wtime();
+        printf("+++++ Time end +++++ \n");
+        double time_elapsed = end_time - start_time;
+        printf("Solution time: %.6f\n", time_elapsed);
+
+        /* error compute */
+        double error = compute_error();
+        printf("Error: %.6f\n", error);
+    } else {
+        printf("Solution with error by step capturing...\n");
+        solve_with_error();
+        /* error compute */
+        double error = compute_error();
+        printf("Error: %.6f\n", error);
+        save_error_history(file_name);
+    }
 
     free(u_prev);
     free(u_curr);
     free(u_next);
+    free(error_history);
     return 0;
 }
