@@ -144,21 +144,20 @@ double compute_error() {
     double t = T;
 
 #pragma omp parallel for collapse(3) reduction(max:max_error)
-    for(int i = 0; i <= N; ++i) {
-        for(int j = 0; j <= N; ++j) {
-            for(int k = 0; k <= N; ++k) {
-                double x = i * hx;
-                double y = j * hy;
-                double z = k * hz;
-                double u_exact = u_analytical(x, y, z, t);
-                double error = fabs(u_curr[get_index(i, j, k)] - u_exact);
-                if(error > max_error) {
-                    max_error = error;
+        for(int i = 0; i <= N; ++i) {
+            for(int j = 0; j <= N; ++j) {
+                for(int k = 0; k <= N; ++k) {
+                    double x = i * hx;
+                    double y = j * hy;
+                    double z = k * hz;
+                    double u_exact = u_analytical(x, y, z, t);
+                    double error = fabs(u_curr[get_index(i, j, k)] - u_exact);
+                    if(error > max_error) {
+                        max_error = error;
+                    }
                 }
             }
         }
-    }
-
     return max_error;
 }
 
@@ -211,8 +210,13 @@ void solve_with_error() {
             printf("Iter %d/%d, Error: %.6e\n", n, K, max_error);
         }
     }
+    double max_over_time = 0.0;
     double final_err = compute_error();
     error_history[K] = final_err;
+    /* find max out of max */
+    for(int n = 0; n <= K; ++n)
+        if(error_history[n] > max_over_time) max_over_time = error_history[n];
+    printf("MAX_OVER_TIME error: %.6f\n", max_over_time);
 }
 
 void solve_straight() {
@@ -454,7 +458,6 @@ int main(int argc, char *argv[]) {
 
     const char file_name[] = "error_history.txt";
 
-    double error;
     double start_time;
     double end_time;
     double time_elapsed;
@@ -463,9 +466,6 @@ int main(int argc, char *argv[]) {
         case 0:
             printf("Solution with error by step capturing...\n");
             solve_with_error();
-            /* error compute */
-            error = compute_error();
-            printf("Error: %.6f\n", error);
             save_error_history(file_name);
             break;
         case 1:
@@ -476,10 +476,6 @@ int main(int argc, char *argv[]) {
             printf("+++++ Time end +++++ \n");
             time_elapsed = end_time - start_time;
             printf("Solution time: %.6f\n", time_elapsed);
-
-            /* error compute */
-            error = compute_error();
-            printf("Error: %.6f\n", error);
             break;
         case 2:
             printf("Straight solution ... \n");
@@ -490,9 +486,6 @@ int main(int argc, char *argv[]) {
             printf("+++++ Time end +++++ \n");
             time_elapsed = end_time - start_time;
             printf("Solution time: %.6f\n", time_elapsed);
-            /* error compute */
-            error = compute_error();
-            printf("Error: %.6f\n", error);
             break;
     }
 
