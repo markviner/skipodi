@@ -5,7 +5,7 @@
 
 #define M_PI 3.14159265358979323846
 
-const int BENCHMARK = 1;
+const int BENCHMARK = 0;
 
 int N;
 int Np;
@@ -203,16 +203,14 @@ void solve_with_error() {
                 }
             }
         }
-
         error_history[n] = max_error;
-
         if((n) % 5 == 0 || n == K-1) {
             printf("Iter %d/%d, Error: %.6e\n", n, K, max_error);
         }
     }
     double max_over_time = 0.0;
-    double final_err = compute_error();
-    error_history[K] = final_err;
+    /* double final_err = compute_error(); */
+    /* error_history[K] = final_err; */
     /* find max out of max */
     for(int n = 0; n <= K; ++n)
         if(error_history[n] > max_over_time) max_over_time = error_history[n];

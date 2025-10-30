@@ -16,13 +16,13 @@ RED = \033[0;31m
 RESET = \033[0m
 test_local: $(TARGET)
 	@printf "${YELLOW}%10sTest local${RESET}\n"
-	./$(TARGET) 127 1.0 71 1
+	./$(TARGET) 127 1.0 141 1
 	@echo ""
-	./$(TARGET) 127 1.0 71 2
+	./$(TARGET) 127 1.0 141 2
 	@echo ""
-	./$(TARGET) 127 1.0 71 4
+	./$(TARGET) 127 1.0 141 4
 	@echo ""
-	./$(TARGET) 127 1.0 71 8
+	./$(TARGET) 127 1.0 141 8
 
 straight_all: $(TARGET)
 	@printf "${YELLOW}%10sTest straight_all for 0.1 and pi (128, 256)${RESET}\n"
@@ -59,19 +59,19 @@ n128_01: $(TARGET)
 n256_01: $(TARGET)
 	@printf "${YELLOW}%10sTest n256 0.1${RESET}\n"
 	@printf "${CYAN}%sNp = 2${RESET}\n"
-	./$(TARGET) 127 1.0 141 2
+	./$(TARGET) 255 1.0 141 2
 	@echo ""
 	@printf "${CYAN}%sNp = 4${RESET}\n"
-	./$(TARGET) 127 1.0 141 4
+	./$(TARGET) 255 1.0 141 4
 	@echo ""
 	@printf "${CYAN}%sNp = 8${RESET}\n"
-	./$(TARGET) 127 1.0 141 8
+	./$(TARGET) 255 1.0 141 8
 	@echo ""
 	@printf "${CYAN}%sNp = 16${RESET}\n"
-	./$(TARGET) 127 1.0 141 16
+	./$(TARGET) 255 1.0 141 16
 	@echo ""
 	@printf "${CYAN}%sNp = 32${RESET}\n"
-	./$(TARGET) 127 1.0 141 32
+	./$(TARGET) 255 1.0 141 32
 
 n128_pi: $(TARGET)
 	@printf "${YELLOW}%10sTest n128 pi${RESET}\n"
@@ -93,19 +93,19 @@ n128_pi: $(TARGET)
 n256_pi: $(TARGET)
 	@printf "${YELLOW}%10sTest n256 pi${RESET}\n"
 	@printf "${CYAN}%sNp = 2${RESET}\n"
-	./$(TARGET) 127 3.14159265359 141 2
+	./$(TARGET) 255 3.14159265359 141 2
 	@echo ""
 	@printf "${CYAN}%sNp = 4${RESET}\n"
-	./$(TARGET) 127 3.14159265359 141 4
+	./$(TARGET) 255 3.14159265359 141 4
 	@echo ""
 	@printf "${CYAN}%sNp = 8${RESET}\n"
-	./$(TARGET) 127 3.14159265359 141 8
+	./$(TARGET) 255 3.14159265359 141 8
 	@echo ""
 	@printf "${CYAN}%sNp = 16${RESET}\n"
-	./$(TARGET) 127 3.14159265359 141 16
+	./$(TARGET) 255 3.14159265359 141 16
 	@echo ""
 	@printf "${CYAN}%sNp = 32${RESET}\n"
-	./$(TARGET) 127 3.14159265359 141 32
+	./$(TARGET) 255 3.14159265359 141 32
 	
 clean:
 	rm -r $(TARGET)
