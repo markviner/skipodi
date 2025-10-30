@@ -5,7 +5,7 @@
 
 #define M_PI 3.14159265358979323846
 
-const int BENCHMARK = 2;
+const int BENCHMARK = 1;
 
 int N;
 int Np;
@@ -135,8 +135,31 @@ void solve() {
         u_curr = u_next;
         u_next = temp;
         
-        printf("Iter %d\n", n);
+        /* printf("Iter %d\n", n); */
     }
+}
+
+double compute_error() {
+    double max_error = 0.0;
+    double t = T;
+
+#pragma omp parallel for collapse(3) reduction(max:max_error)
+    for(int i = 0; i <= N; ++i) {
+        for(int j = 0; j <= N; ++j) {
+            for(int k = 0; k <= N; ++k) {
+                double x = i * hx;
+                double y = j * hy;
+                double z = k * hz;
+                double u_exact = u_analytical(x, y, z, t);
+                double error = fabs(u_curr[get_index(i, j, k)] - u_exact);
+                if(error > max_error) {
+                    max_error = error;
+                }
+            }
+        }
+    }
+
+    return max_error;
 }
 
 void solve_with_error() {
@@ -145,7 +168,7 @@ void solve_with_error() {
     error_history = (double*)malloc((K+1) * sizeof(double));
     error_history[0] = 0.0;
 
-    for(int n = 1; n <= K; n++) {
+    for(int n = 1; n < K; ++n) {
 #pragma omp parallel for collapse(3) schedule(static)
         for(int i = 1; i < N; ++i) {
             for(int j = 1; j < N; ++j) {
@@ -184,10 +207,12 @@ void solve_with_error() {
 
         error_history[n] = max_error;
 
-        if((n+1) % 5 == 0 || n+1 == K) {
-            printf("Iter %d/%d, Error: %.6e\n", n+1, K, max_error);
+        if((n) % 5 == 0 || n == K-1) {
+            printf("Iter %d/%d, Error: %.6e\n", n, K, max_error);
         }
     }
+    double final_err = compute_error();
+    error_history[K] = final_err;
 }
 
 void solve_straight() {
@@ -256,8 +281,7 @@ void solve_straight() {
         }
     }
 
-    /* time loop */
-    for(int n = 1; n <= K; n++) {
+    for(int n = 1; n < K; ++n) {
         /* u^{n+1} = 2*u^n - u^{n-1} + a^2*tau^2 * laplacian(u^n) */
         for(int i = 1; i < N; ++i) {
             for(int j = 1; j < N; ++j) {
@@ -296,7 +320,7 @@ void solve_straight() {
         u_curr = u_next;
         u_next = temp;
 
-        if(n % 10 == 0 || n == K) {
+        if(n % 10 == 0 || n == K-1) {
             printf("Iter %d/%d\n", n, K);
         }
     }
@@ -318,29 +342,6 @@ void save_error_history(const char *filename) {
 
     fclose(f);
     printf("history saved to %s\n", filename);
-}
-
-double compute_error() {
-    double max_error = 0.0;
-    double t = T;
-
-#pragma omp parallel for collapse(3) reduction(max:max_error)
-    for(int i = 0; i <= N; ++i) {
-        for(int j = 0; j <= N; ++j) {
-            for(int k = 0; k <= N; ++k) {
-                double x = i * hx;
-                double y = j * hy;
-                double z = k * hz;
-                double u_exact = u_analytical(x, y, z, t);
-                double error = fabs(u_curr[get_index(i, j, k)] - u_exact);
-                if(error > max_error) {
-                    max_error = error;
-                }
-            }
-        }
-    }
-
-    return max_error;
 }
 
 int main(int argc, char *argv[]) {
@@ -466,6 +467,7 @@ int main(int argc, char *argv[]) {
             error = compute_error();
             printf("Error: %.6f\n", error);
             save_error_history(file_name);
+            break;
         case 1:
             printf("+++++ Timer start +++++ \n");
             start_time = omp_get_wtime();
