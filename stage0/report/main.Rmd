@@ -1,0 +1,156 @@
+---
+output:
+  pdf_document:
+    latex_engine: xelatex
+    number_sections: true
+  html_document:
+    theme: darkly 
+    highlight: tango
+linkcolor: blue
+
+# mainfont: Linux Libertine O
+mainfont: CMU Serif
+# monofont: LiberationMono
+fontsize: 11pt
+numbersections: true
+indent: true
+
+header-includes:
+- \usepackage{indentfirst}
+- \usepackage{float}
+- \newcommand{\R}{\mathbb{R}}
+- \newcommand{\Ll}{\mathbb{L}}
+- \newcommand{\N}{\mathbb{N}}
+- \newcommand{\F}{\mathbb{F}}
+
+- \setlength{\headheight}{15pt} 
+---
+
+<!-- \input{./files/title.tex} -->
+
+\tableofcontents
+
+\vspace*{\fill}
+
+\clearpage
+
+# Постановка задачи (Вариант 2)
+
+$\frac{\partial^{2} u}{\partial t^{2}} = a^{2} \Delta u$
+
+$u \big|_{t=0} = \varphi(x,y, z)$ -- просто состояние системы в момент времени $t=0$
+
+$\frac{\partial u}{\partial t} \big|_{t=0} = 0$ -- т.е. фактически начальная скорость
+
+Однородные граничные условия 1-го рода:
+
+$u(0, y, z, t) = 0$
+
+$u(x, 0, z, t) = 0$
+
+$u(L_{x}, y, z, t) = 0$
+
+$u(x, L_{y}, z, t) = 0$
+
+
+Периодические граничные условия:
+
+$u(x, y, 0, t) = u(x, y, L_{z}, t)$
+                                  
+$\frac{\partial u (x, y, 0, t)}{\partial z} = \frac{\partial u(x, y, L_{z}, t)}{\partial z}$
+
+Аналитическое решение:
+
+$u_{\text{analytical}} = \sin(\frac{\pi x}{L_{x}}) \cdot \sin(\frac{\pi
+y}{L_{y}}) \cdot \sin(\frac{2 \pi z}{L_{z}}) \cdot \cos(a_{t} \cdot t + 2\pi)$
+
+$a_{t} = \sqrt{\frac{1}{L_{x}^{2}} + \frac{1}{L_{y}^{2}} + \frac{4}{L_{z}^{2}}}$
+
+$a^{2} = \frac{1}{\pi^{2}}$
+
+# Численное решение
+
+## Шаги сетки
+
+Для численного решения задачи используем метод конечных разностей, который
+аппроксимирует производные на сетке.
+
+В пространстве мы делаем разбиение области на равномерные ячейки.
+
+Пусть $h_{x},h_{y},h_{z}, \tau$ -- шаги по осям $x, y, z, t$.
+
+$$\omega_{h} = \{(x_{i}, y_{j}, z_{k}) | i = 0, 1, \dots, N, j = 0, 1,
+\dots, N, k = 0, 1, \dots, N\}$$
+
+$$\omega_{\tau} = \{t_{n} | n = 0, 1, \dots, K\}$$
+
+где $x_{i} = ih_{x}, y_{j} = jh_{y}, t_{n} = n\tau$
+
+## Апроксимация производных
+
+Для 2й производной используем разностную схему 2го порядка:
+
+$$\frac{\partial^{2} u}{\partial t^{2}} \approx \frac{u_{i,j,k}^{n+1} -
+2u_{i,j,k}^{n} + u_{i,j,k}^{n-1}}{\tau^{2}}$$
+
+Для оператора Лапласа то же для каждой из переменных:
+
+$$\Delta u^{n} \approx 
+\frac{u_{i+1,j,k}^{n} - 2u_{i,j,k}^{n} + u_{i-1,j,k}^{n}}{h_{x}^{2}} + 
+\frac{u_{i,j+1,k}^{n} - 2u_{i,j,k}^{n} + u_{i,j-1,k}^{n}}{h_{y}^{2}} + 
+\frac{u_{i,j,k+1}^{n} - 2u_{i,j,k}^{n} + u_{i,j,k-1}^{n}}{h_{z}^{2}}$$
+
+Итоговая разностная схема:
+
+\begin{small}
+$$\frac{u_{i,j,k}^{n+1} - 2u_{i,j,k}^{n} + u_{i,j,k}^{n-1}}{\tau^{2}} =
+a^{2} 
+\bigg[
+    \frac{u_{i+1,j,k}^{n} - 2u_{i,j,k}^{n} + u_{i-1,j,k}^{n}}{h_{x}^{2}} + 
+    \frac{u_{i,j+1,k}^{n} - 2u_{i,j,k}^{n} + u_{i,j-1,k}^{n}}{h_{y}^{2}} + 
+    \frac{u_{i,j,k+1}^{n} - 2u_{i,j,k}^{n} + u_{i,j,k-1}^{n}}{h_{z}^{2}}
+\bigg]$$
+\end{small}
+
+По условию
+
+$$u_{i,j,k}^{0} = \varphi(x_{i}, y_{j}, z_{k}), (x_{i}, y_{j}, z_{k}) \in
+\omega_{h}$$
+
+Тогда 
+
+$$u_{i,j,k}^{1} = u_{i,j,k}^{0} + a^{2}\frac{\tau^{2}}{2}\Delta_{h}\varphi(x_{i}, y_{j}, z_{k})$$
+
+Схема является явной, т.к. решение на следующем шаге $n + 1$ выражется через
+значения на текущем шаге $n$ и предыдущем шаге $n - 1$
+
+\begin{small}
+$$u_{i,j,k}^{n+1} = 2u_{i,j,k}^{n} - u_{i,j,k}^{n-1} + a^{2}\tau^{2}
+\bigg[
+    \frac{u_{i+1,j,k}^{n} - 2u_{i,j,k}^{n} + u_{i-1,j,k}^{n}}{h_{x}^{2}} + 
+    \frac{u_{i,j+1,k}^{n} - 2u_{i,j,k}^{n} + u_{i,j-1,k}^{n}}{h_{y}^{2}} + 
+    \frac{u_{i,j,k+1}^{n} - 2u_{i,j,k}^{n} + u_{i,j,k-1}^{n}}{h_{z}^{2}}
+\bigg]$$
+\end{small}
+
+# Параллелизация по блокам
+
+Параллелизация задачи будет осуществляться на основе блочного разбиения
+области.
+
+## Принцип разбиения
+
+Область $\Omega = [0, L_{x}] \times [0, L_{y}] \times [0, L_{z}]$ разбивается
+на подобласти-блоки. Каждый поток OpenMP обрабатывает свой блок сетки.
+
+Пусть $N_{p}$ -- число потоков OpenMP. Тогда область разбивается на блоки по
+каждому из трех измерений:
+
+- По оси $x$: $n_{x}$ блоков
+
+- По оси $y$: $n_{y}$ блоков  
+
+- По оси $z$: $n_{z}$ блоков
+
+где $n_{x} \cdot n_{y} \cdot n_{z} = N_{p}$
+
