@@ -1,0 +1,624 @@
+[edu-cmc-skmodel25-620-02@polus-ib stage0]$ make straight_all
+gcc -O3 -Wall -fopenmp -std=c99 -o out main.c -lm
+          Test straight_all for 0.1 and pi (128, 256)
+          CHANGE 'BENCHMARK' -> 2
+128, 0.1
+./out 127 1.0
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 1.000000
+
+=========== Courant Check ===========
+h_min:       0.007874
+tau_max:     0.014282 (for stability)
+tau:         0.050000 (current)
+Courant num: 3.501 (must be < 1.0)
+WARNING: Courant unstable!
+Minimum K for stability: 71
+=========== Params ===========
+Mesh:        127^3 = 2048383 nodes
+Mesh ratios: 1.000000 x 1.000000 x 1.000000
+K:           20
+Np:          1
+Steps:       hx = 0.007874, hy = 0.007874, hz = 0.007874
+params:      at = 2.449490, a^2 = 0.101321
+Straight solution ...
++++++ Timer start +++++
+Iter 10/20
+Iter 19/20
++++++ Time end +++++
+Solution time: 1.111928
+
+256, 0.1
+./out 255 1.0
+INPUT Mesh Size (N): 255^3
+INPUT Lx = Ly = Lz = 1.000000
+
+=========== Courant Check ===========
+h_min:       0.003922
+tau_max:     0.007113 (for stability)
+tau:         0.050000 (current)
+Courant num: 7.029 (must be < 1.0)
+WARNING: Courant unstable!
+Minimum K for stability: 141
+=========== Params ===========
+Mesh:        255^3 = 16581375 nodes
+Mesh ratios: 1.000000 x 1.000000 x 1.000000
+K:           20
+Np:          1
+Steps:       hx = 0.003922, hy = 0.003922, hz = 0.003922
+params:      at = 2.449490, a^2 = 0.101321
+Straight solution ...
++++++ Timer start +++++
+Iter 10/20
+Iter 19/20
++++++ Time end +++++
+Solution time: 8.495470
+
+128, pi
+./out 127 3.14159265359
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 3.141593
+
+=========== Courant Check ===========
+h_min:       0.024737
+tau_max:     0.044868 (for stability)
+tau:         0.050000 (current)
+Courant num: 1.114 (must be < 1.0)
+WARNING: Courant unstable!
+Minimum K for stability: 23
+=========== Params ===========
+Mesh:        127^3 = 2048383 nodes
+Mesh ratios: 3.141593 x 3.141593 x 3.141593
+K:           20
+Np:          1
+Steps:       hx = 0.024737, hy = 0.024737, hz = 0.024737
+params:      at = 0.779697, a^2 = 0.101321
+Straight solution ...
++++++ Timer start +++++
+Iter 10/20
+Iter 19/20
++++++ Time end +++++
+Solution time: 1.108533
+
+256, pi
+./out 255 3.14159265359
+INPUT Mesh Size (N): 255^3
+INPUT Lx = Ly = Lz = 3.141593
+
+=========== Courant Check ===========
+h_min:       0.012320
+tau_max:     0.022346 (for stability)
+tau:         0.050000 (current)
+Courant num: 2.238 (must be < 1.0)
+WARNING: Courant unstable!
+Minimum K for stability: 45
+=========== Params ===========
+Mesh:        255^3 = 16581375 nodes
+Mesh ratios: 3.141593 x 3.141593 x 3.141593
+K:           20
+Np:          1
+Steps:       hx = 0.012320, hy = 0.012320, hz = 0.012320
+params:      at = 0.779697, a^2 = 0.101321
+Straight solution ...
++++++ Timer start +++++
+Iter 10/20
+Iter 19/20
++++++ Time end +++++
+Solution time: 8.458208
+
+
+
+[edu-cmc-skmodel25-620-02@polus-ib stage0]$ make n128_01
+gcc -O3 -Wall -fopenmp -std=c99 -o out main.c -lm
+          Test n128 0.1
+Np = 1
+./out 127 1.0 71 1
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 1.000000
+INPUT Number Of Steps (K): 71
+INPUT Number Of Threads (Np): 1
+
+=========== Courant Check ===========
+h_min:       0.007874
+tau_max:     0.014282 (for stability)
+tau:         0.014085 (current)
+Courant num: 0.986 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        127^3 = 2048383 nodes
+Mesh ratios: 1.000000 x 1.000000 x 1.000000
+K:           71
+Np:          1
+Steps:       hx = 0.007874, hy = 0.007874, hz = 0.007874
+params:      at = 2.449490, a^2 = 0.101321
++++++ Timer start +++++
++++++ Time end +++++
+Solution time: 2.861161
+
+Np = 2
+./out 127 1.0 71 2
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 1.000000
+INPUT Number Of Steps (K): 71
+INPUT Number Of Threads (Np): 2
+
+=========== Courant Check ===========
+h_min:       0.007874
+tau_max:     0.014282 (for stability)
+tau:         0.014085 (current)
+Courant num: 0.986 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        127^3 = 2048383 nodes
+Mesh ratios: 1.000000 x 1.000000 x 1.000000
+K:           71
+Np:          2
+Steps:       hx = 0.007874, hy = 0.007874, hz = 0.007874
+params:      at = 2.449490, a^2 = 0.101321
++++++ Timer start +++++
++++++ Time end +++++
+Solution time: 1.460134
+
+Np = 4
+./out 127 1.0 71 4
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 1.000000
+INPUT Number Of Steps (K): 71
+INPUT Number Of Threads (Np): 4
+
+=========== Courant Check ===========
+h_min:       0.007874
+tau_max:     0.014282 (for stability)
+tau:         0.014085 (current)
+Courant num: 0.986 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        127^3 = 2048383 nodes
+Mesh ratios: 1.000000 x 1.000000 x 1.000000
+K:           71
+Np:          4
+Steps:       hx = 0.007874, hy = 0.007874, hz = 0.007874
+params:      at = 2.449490, a^2 = 0.101321
++++++ Timer start +++++
++++++ Time end +++++
+Solution time: 0.738464
+
+Np = 8
+./out 127 1.0 71 8
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 1.000000
+INPUT Number Of Steps (K): 71
+INPUT Number Of Threads (Np): 8
+
+=========== Courant Check ===========
+h_min:       0.007874
+tau_max:     0.014282 (for stability)
+tau:         0.014085 (current)
+Courant num: 0.986 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        127^3 = 2048383 nodes
+Mesh ratios: 1.000000 x 1.000000 x 1.000000
+K:           71
+Np:          8
+Steps:       hx = 0.007874, hy = 0.007874, hz = 0.007874
+params:      at = 2.449490, a^2 = 0.101321
++++++ Timer start +++++
++++++ Time end +++++
+Solution time: 0.355476
+
+Np = 16
+./out 127 1.0 71 16
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 1.000000
+INPUT Number Of Steps (K): 71
+INPUT Number Of Threads (Np): 16
+
+=========== Courant Check ===========
+h_min:       0.007874
+tau_max:     0.014282 (for stability)
+tau:         0.014085 (current)
+Courant num: 0.986 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        127^3 = 2048383 nodes
+Mesh ratios: 1.000000 x 1.000000 x 1.000000
+K:           71
+Np:          16
+Steps:       hx = 0.007874, hy = 0.007874, hz = 0.007874
+params:      at = 2.449490, a^2 = 0.101321
++++++ Timer start +++++
++++++ Time end +++++
+Solution time: 0.343599
+
+
+
+
+
+[edu-cmc-skmodel25-620-02@polus-ib stage0]$ make n256_01
+          Test n256 0.1
+Np = 2
+./out 127 1.0 141 2
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 1.000000
+INPUT Number Of Steps (K): 141
+INPUT Number Of Threads (Np): 2
+
+=========== Courant Check ===========
+h_min:       0.007874
+tau_max:     0.014282 (for stability)
+tau:         0.007092 (current)
+Courant num: 0.497 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        127^3 = 2048383 nodes
+Mesh ratios: 1.000000 x 1.000000 x 1.000000
+K:           141
+Np:          2
+Steps:       hx = 0.007874, hy = 0.007874, hz = 0.007874
+params:      at = 2.449490, a^2 = 0.101321
++++++ Timer start +++++
++++++ Time end +++++
+Solution time: 2.759833
+
+Np = 4
+./out 127 1.0 141 4
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 1.000000
+INPUT Number Of Steps (K): 141
+INPUT Number Of Threads (Np): 4
+
+=========== Courant Check ===========
+h_min:       0.007874
+tau_max:     0.014282 (for stability)
+tau:         0.007092 (current)
+Courant num: 0.497 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        127^3 = 2048383 nodes
+Mesh ratios: 1.000000 x 1.000000 x 1.000000
+K:           141
+Np:          4
+Steps:       hx = 0.007874, hy = 0.007874, hz = 0.007874
+params:      at = 2.449490, a^2 = 0.101321
++++++ Timer start +++++
++++++ Time end +++++
+Solution time: 1.399643
+
+Np = 8
+./out 127 1.0 141 8
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 1.000000
+INPUT Number Of Steps (K): 141
+INPUT Number Of Threads (Np): 8
+
+=========== Courant Check ===========
+h_min:       0.007874
+tau_max:     0.014282 (for stability)
+tau:         0.007092 (current)
+Courant num: 0.497 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        127^3 = 2048383 nodes
+Mesh ratios: 1.000000 x 1.000000 x 1.000000
+K:           141
+Np:          8
+Steps:       hx = 0.007874, hy = 0.007874, hz = 0.007874
+params:      at = 2.449490, a^2 = 0.101321
++++++ Timer start +++++
++++++ Time end +++++
+Solution time: 0.807368
+
+Np = 16
+./out 127 1.0 141 16
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 1.000000
+INPUT Number Of Steps (K): 141
+INPUT Number Of Threads (Np): 16
+
+=========== Courant Check ===========
+h_min:       0.007874
+tau_max:     0.014282 (for stability)
+tau:         0.007092 (current)
+Courant num: 0.497 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        127^3 = 2048383 nodes
+Mesh ratios: 1.000000 x 1.000000 x 1.000000
+K:           141
+Np:          16
+Steps:       hx = 0.007874, hy = 0.007874, hz = 0.007874
+params:      at = 2.449490, a^2 = 0.101321
++++++ Timer start +++++
++++++ Time end +++++
+Solution time: 0.649916
+
+Np = 32
+./out 127 1.0 141 32
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 1.000000
+INPUT Number Of Steps (K): 141
+INPUT Number Of Threads (Np): 32
+
+=========== Courant Check ===========
+h_min:       0.007874
+tau_max:     0.014282 (for stability)
+tau:         0.007092 (current)
+Courant num: 0.497 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        127^3 = 2048383 nodes
+Mesh ratios: 1.000000 x 1.000000 x 1.000000
+K:           141
+Np:          32
+Steps:       hx = 0.007874, hy = 0.007874, hz = 0.007874
+params:      at = 2.449490, a^2 = 0.101321
++++++ Timer start +++++
++++++ Time end +++++
+Solution time: 0.542053
+
+[edu-cmc-skmodel25-620-02@polus-ib stage0]$ make n128_pi
+          Test n128 pi
+Np = 1
+./out 127 3.14159265359 71 1
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 3.141593
+INPUT Number Of Steps (K): 71
+INPUT Number Of Threads (Np): 1
+
+=========== Courant Check ===========
+h_min:       0.024737
+tau_max:     0.044868 (for stability)
+tau:         0.014085 (current)
+Courant num: 0.314 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        127^3 = 2048383 nodes
+Mesh ratios: 3.141593 x 3.141593 x 3.141593
+K:           71
+Np:          1
+Steps:       hx = 0.024737, hy = 0.024737, hz = 0.024737
+params:      at = 0.779697, a^2 = 0.101321
++++++ Timer start +++++
++++++ Time end +++++
+Solution time: 2.856774
+
+Np = 2
+./out 127 3.14159265359 71 2
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 3.141593
+INPUT Number Of Steps (K): 71
+INPUT Number Of Threads (Np): 2
+
+=========== Courant Check ===========
+h_min:       0.024737
+tau_max:     0.044868 (for stability)
+tau:         0.014085 (current)
+Courant num: 0.314 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        127^3 = 2048383 nodes
+Mesh ratios: 3.141593 x 3.141593 x 3.141593
+K:           71
+Np:          2
+Steps:       hx = 0.024737, hy = 0.024737, hz = 0.024737
+params:      at = 0.779697, a^2 = 0.101321
++++++ Timer start +++++
++++++ Time end +++++
+Solution time: 1.453950
+
+Np = 4
+./out 127 3.14159265359 71 4
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 3.141593
+INPUT Number Of Steps (K): 71
+INPUT Number Of Threads (Np): 4
+
+=========== Courant Check ===========
+h_min:       0.024737
+tau_max:     0.044868 (for stability)
+tau:         0.014085 (current)
+Courant num: 0.314 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        127^3 = 2048383 nodes
+Mesh ratios: 3.141593 x 3.141593 x 3.141593
+K:           71
+Np:          4
+Steps:       hx = 0.024737, hy = 0.024737, hz = 0.024737
+params:      at = 0.779697, a^2 = 0.101321
++++++ Timer start +++++
++++++ Time end +++++
+Solution time: 0.740521
+
+Np = 8
+./out 127 3.14159265359 71 8
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 3.141593
+INPUT Number Of Steps (K): 71
+INPUT Number Of Threads (Np): 8
+
+=========== Courant Check ===========
+h_min:       0.024737
+tau_max:     0.044868 (for stability)
+tau:         0.014085 (current)
+Courant num: 0.314 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        127^3 = 2048383 nodes
+Mesh ratios: 3.141593 x 3.141593 x 3.141593
+K:           71
+Np:          8
+Steps:       hx = 0.024737, hy = 0.024737, hz = 0.024737
+params:      at = 0.779697, a^2 = 0.101321
++++++ Timer start +++++
++++++ Time end +++++
+Solution time: 0.360987
+
+Np = 16
+./out 127 3.14159265359 71 16
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 3.141593
+INPUT Number Of Steps (K): 71
+INPUT Number Of Threads (Np): 16
+
+=========== Courant Check ===========
+h_min:       0.024737
+tau_max:     0.044868 (for stability)
+tau:         0.014085 (current)
+Courant num: 0.314 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        127^3 = 2048383 nodes
+Mesh ratios: 3.141593 x 3.141593 x 3.141593
+K:           71
+Np:          16
+Steps:       hx = 0.024737, hy = 0.024737, hz = 0.024737
+params:      at = 0.779697, a^2 = 0.101321
++++++ Timer start +++++
++++++ Time end +++++
+Solution time: 0.341151
+
+
+
+[edu-cmc-skmodel25-620-02@polus-ib stage0]$ make n256_pi
+          Test n256 pi
+Np = 2
+./out 127 3.14159265359 141 2
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 3.141593
+INPUT Number Of Steps (K): 141
+INPUT Number Of Threads (Np): 2
+
+=========== Courant Check ===========
+h_min:       0.024737
+tau_max:     0.044868 (for stability)
+tau:         0.007092 (current)
+Courant num: 0.158 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        127^3 = 2048383 nodes
+Mesh ratios: 3.141593 x 3.141593 x 3.141593
+K:           141
+Np:          2
+Steps:       hx = 0.024737, hy = 0.024737, hz = 0.024737
+params:      at = 0.779697, a^2 = 0.101321
++++++ Timer start +++++
++++++ Time end +++++
+Solution time: 2.762406
+
+Np = 4
+./out 127 3.14159265359 141 4
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 3.141593
+INPUT Number Of Steps (K): 141
+INPUT Number Of Threads (Np): 4
+
+=========== Courant Check ===========
+h_min:       0.024737
+tau_max:     0.044868 (for stability)
+tau:         0.007092 (current)
+Courant num: 0.158 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        127^3 = 2048383 nodes
+Mesh ratios: 3.141593 x 3.141593 x 3.141593
+K:           141
+Np:          4
+Steps:       hx = 0.024737, hy = 0.024737, hz = 0.024737
+params:      at = 0.779697, a^2 = 0.101321
++++++ Timer start +++++
++++++ Time end +++++
+Solution time: 1.406494
+
+Np = 8
+./out 127 3.14159265359 141 8
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 3.141593
+INPUT Number Of Steps (K): 141
+INPUT Number Of Threads (Np): 8
+
+=========== Courant Check ===========
+h_min:       0.024737
+tau_max:     0.044868 (for stability)
+tau:         0.007092 (current)
+Courant num: 0.158 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        127^3 = 2048383 nodes
+Mesh ratios: 3.141593 x 3.141593 x 3.141593
+K:           141
+Np:          8
+Steps:       hx = 0.024737, hy = 0.024737, hz = 0.024737
+params:      at = 0.779697, a^2 = 0.101321
++++++ Timer start +++++
++++++ Time end +++++
+Solution time: 0.682409
+
+Np = 16
+./out 127 3.14159265359 141 16
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 3.141593
+INPUT Number Of Steps (K): 141
+INPUT Number Of Threads (Np): 16
+
+=========== Courant Check ===========
+h_min:       0.024737
+tau_max:     0.044868 (for stability)
+tau:         0.007092 (current)
+Courant num: 0.158 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        127^3 = 2048383 nodes
+Mesh ratios: 3.141593 x 3.141593 x 3.141593
+K:           141
+Np:          16
+Steps:       hx = 0.024737, hy = 0.024737, hz = 0.024737
+params:      at = 0.779697, a^2 = 0.101321
++++++ Timer start +++++
++++++ Time end +++++
+Solution time: 0.664840
+
+Np = 32
+./out 127 3.14159265359 141 32
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 3.141593
+INPUT Number Of Steps (K): 141
+INPUT Number Of Threads (Np): 32
+
+=========== Courant Check ===========
+h_min:       0.024737
+tau_max:     0.044868 (for stability)
+tau:         0.007092 (current)
+Courant num: 0.158 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        127^3 = 2048383 nodes
+Mesh ratios: 3.141593 x 3.141593 x 3.141593
+K:           141
+Np:          32
+Steps:       hx = 0.024737, hy = 0.024737, hz = 0.024737
+params:      at = 0.779697, a^2 = 0.101321
++++++ Timer start +++++
++++++ Time end +++++
+Solution time: 0.541384
