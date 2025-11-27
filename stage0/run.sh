@@ -13,4 +13,3 @@ bsub <<EOF
 #BSUB -e "omp_job.%J.err"
 OMP_NUM_THREADS=$num_threads ./out $params
 EOF
-

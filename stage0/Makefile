@@ -9,6 +9,7 @@ LDFLAGS = -lm
 
 TARGET = out
 TARGET_HOME = home
+
 SRC = main.c
 
 ifdef ERRORS
@@ -21,11 +22,11 @@ endif
 
 all: $(TARGET)
 
+$(TARGET): $(SRC)
+	$(IBM_CC) $(OMPFLAGS) -o $(TARGET) $(SRC) $(OPTIMFLAG)
+
 $(TARGET_HOME): $(SRC)
 	$(CC) $(CFLAGS) $(LDFLAGS) $(FFLAGS) -o $(TARGET_HOME) $(SRC) $(OPTIMFLAG)
-
-$(TARGET): $(SRC)
-	$(IBC_CC) $(CFLAGS) $(LDFLAGS) $(OMPFLAGS) -o $(TARGET) $(SRC) $(OMPFLAGS)
 
 CYAN = \033[0;36m
 YELLOW = \033[0;33m

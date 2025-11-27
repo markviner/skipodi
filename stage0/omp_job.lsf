@@ -1,0 +1,4 @@
+#BSUB -n 4
+#BSUB -W 00:15
+#BSUB -o "omp_job.%J.out"
+OMP_NUM_THREADS=16 ./a.out
