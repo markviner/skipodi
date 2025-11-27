@@ -132,7 +132,7 @@ void save_error_history(const char *filename) {
 void solve() {
     init();
 
-#ifdef SOLVE_WITH_ERROR
+#ifdef COMPUTE_ERRORS
     error_history = (double*)malloc((K+1) * sizeof(double));
     error_history[0] = 0.0;
 #endif
@@ -157,7 +157,7 @@ void solve() {
         u_curr = u_next;
         u_next = temp;
 
-#ifdef SOLVE_WITH_ERROR
+#ifdef COMPUTE_ERRORS
         /* get error at current time step */
         double max_error = 0.0;
         double t_current = n * tau;
@@ -182,7 +182,7 @@ void solve() {
 #endif
     }
 
-#ifdef SOLVE_WITH_ERROR
+#ifdef COMPUTE_ERRORS
     double max_over_time = 0.0;
     /* double final_err = compute_error(); */
     /* error_history[K] = final_err; */
@@ -190,10 +190,14 @@ void solve() {
     for(int n = 0; n <= K; ++n)
         if(error_history[n] > max_over_time) max_over_time = error_history[n];
     printf("MAX_OVER_TIME error: %.6f\n", max_over_time);
+#endif
+
+
+#ifdef LOG_ERRORS
     save_error_history(file_name);
     printf("Saved error history in file\n");
-    
 #endif
+
 }
 
 int main(int argc, char *argv[]) {
@@ -304,7 +308,7 @@ int main(int argc, char *argv[]) {
         u_next[i] = 0.0;
     }
 
-#ifdef SOLVE_WITH_ERROR
+#ifdef LOG_ERRORS
     char buffer[50];
     if (L > 1.0)
         sprintf(buffer, "n%d_pi.txt", N);
@@ -328,7 +332,7 @@ int main(int argc, char *argv[]) {
     free(u_prev);
     free(u_curr);
     free(u_next);
-#ifdef SOLVE_WITH_ERROR
+#ifdef COMPUTE_ERRORS
     free(error_history);
 #endif
     return 0;

@@ -58,7 +58,7 @@ double laplacian(double *u, int i, int j, int k) {
     return lap_x + lap_y + lap_z;
 }
 
-void solve_straight() {
+void solve_naive() {
     /* u^0 = phi(x,y,z) */
     for(int i = 1; i < N; ++i) {
         for(int j = 1; j < N; ++j) {
@@ -270,7 +270,7 @@ int main(int argc, char *argv[]) {
     printf("Straight solution ... \n");
     printf("+++++ Timer start +++++ \n");
     start_time = clock();
-    solve_straight();
+    solve_naive();
     end_time = clock();
     printf("+++++ Time end +++++ \n");
     time_elapsed = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
