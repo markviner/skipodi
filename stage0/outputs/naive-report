@@ -1,4 +1,4 @@
-n128 naive
+n128 naive 1.0
 INPUT Mesh Size (N): 127^3
 INPUT Lx = Ly = Lz = 1.000000
 INPUT Number Of Steps (K): 71
@@ -27,7 +27,7 @@ Iter 50/71
 Iter 60/71
 Iter 70/71
 +++++ Time end +++++
-Solution time: 3.494550
+Solution time: 3.485873
 INPUT Mesh Size (N): 127^3
 INPUT Lx = Ly = Lz = 1.000000
 INPUT Number Of Steps (K): 71
@@ -56,7 +56,7 @@ Iter 50/71
 Iter 60/71
 Iter 70/71
 +++++ Time end +++++
-Solution time: 3.462473
+Solution time: 3.478770
 INPUT Mesh Size (N): 127^3
 INPUT Lx = Ly = Lz = 1.000000
 INPUT Number Of Steps (K): 71
@@ -85,7 +85,7 @@ Iter 50/71
 Iter 60/71
 Iter 70/71
 +++++ Time end +++++
-Solution time: 3.542108
+Solution time: 3.486353
 INPUT Mesh Size (N): 127^3
 INPUT Lx = Ly = Lz = 1.000000
 INPUT Number Of Steps (K): 71
@@ -114,7 +114,7 @@ Iter 50/71
 Iter 60/71
 Iter 70/71
 +++++ Time end +++++
-Solution time: 3.531238
+Solution time: 3.463711
 INPUT Mesh Size (N): 127^3
 INPUT Lx = Ly = Lz = 1.000000
 INPUT Number Of Steps (K): 71
@@ -143,8 +143,8 @@ Iter 50/71
 Iter 60/71
 Iter 70/71
 +++++ Time end +++++
-Solution time: 3.536736
-n256 naive
+Solution time: 3.470245
+n256 naive 1.0
 INPUT Mesh Size (N): 255^3
 INPUT Lx = Ly = Lz = 1.000000
 INPUT Number Of Steps (K): 141
@@ -180,7 +180,43 @@ Iter 120/141
 Iter 130/141
 Iter 140/141
 +++++ Time end +++++
-Solution time: 55.255246
+Solution time: 54.546679
+INPUT Mesh Size (N): 255^3
+INPUT Lx = Ly = Lz = 1.000000
+INPUT Number Of Steps (K): 141
+
+=========== Courant Check ===========
+h_min:       0.003922
+tau_max:     0.007113 (for stability)
+tau:         0.007092 (current)
+Courant num: 0.997 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        256^3 = 16777216 nodes
+Mesh ratios: 1.000000 x 1.000000 x 1.000000
+K:           141
+Np:          1
+Steps:       hx = 0.003922, hy = 0.003922, hz = 0.003922
+params:      at = 2.449490, a^2 = 0.101321
+Straight solution ...
++++++ Timer start +++++
+Iter 10/141
+Iter 20/141
+Iter 30/141
+Iter 40/141
+b"Iter 50/141
+Iter 60/141
+Iter 70/141
+Iter 80/141
+Iter 90/141
+Iter 100/141
+Iter 110/141
+Iter 120/141
+Iter 130/141
+Iter 140/141
++++++ Time end +++++
+Solution time: 54.914123
 INPUT Mesh Size (N): 255^3
 INPUT Lx = Ly = Lz = 1.000000
 INPUT Number Of Steps (K): 141
@@ -216,7 +252,7 @@ Iter 120/141
 Iter 130/141
 Iter 140/141
 +++++ Time end +++++
-Solution time: 55.323334
+Solution time: 54.551033
 INPUT Mesh Size (N): 255^3
 INPUT Lx = Ly = Lz = 1.000000
 INPUT Number Of Steps (K): 141
@@ -252,7 +288,7 @@ Iter 120/141
 Iter 130/141
 Iter 140/141
 +++++ Time end +++++
-Solution time: 55.144343
+Solution time: 54.803058
 INPUT Mesh Size (N): 255^3
 INPUT Lx = Ly = Lz = 1.000000
 INPUT Number Of Steps (K): 141
@@ -288,25 +324,172 @@ Iter 120/141
 Iter 130/141
 Iter 140/141
 +++++ Time end +++++
-Solution time: 54.778934
+Solution time: 54.596946
+n128 naive pi
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 3.141593
+INPUT Number Of Steps (K): 71
+
+=========== Courant Check ===========
+h_min:       0.024737
+tau_max:     0.044868 (for stability)
+tau:         0.014085 (current)
+Courant num: 0.314 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        128^3 = 2097152 nodes
+Mesh ratios: 3.141593 x 3.141593 x 3.141593
+K:           71
+Np:          1
+Steps:       hx = 0.024737, hy = 0.024737, hz = 0.024737
+params:      at = 0.779697, a^2 = 0.101321
+Straight solution ...
++++++ Timer start +++++
+Iter 10/71
+Iter 20/71
+Iter 30/71
+Iter 40/71
+Iter 50/71
+Iter 60/71
+Iter 70/71
++++++ Time end +++++
+Solution time: 3.486221
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 3.141593
+INPUT Number Of Steps (K): 71
+
+=========== Courant Check ===========
+h_min:       0.024737
+tau_max:     0.044868 (for stability)
+tau:         0.014085 (current)
+Courant num: 0.314 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        128^3 = 2097152 nodes
+Mesh ratios: 3.141593 x 3.141593 x 3.141593
+K:           71
+Np:          1
+Steps:       hx = 0.024737, hy = 0.024737, hz = 0.024737
+params:      at = 0.779697, a^2 = 0.101321
+Straight solution ...
++++++ Timer start +++++
+Iter 10/71
+Iter 20/71
+Iter 30/71
+Iter 40/71
+Iter 50/71
+Iter 60/71
+Iter 70/71
++++++ Time end +++++
+Solution time: 3.506211
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 3.141593
+INPUT Number Of Steps (K): 71
+
+=========== Courant Check ===========
+h_min:       0.024737
+tau_max:     0.044868 (for stability)
+tau:         0.014085 (current)
+Courant num: 0.314 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        128^3 = 2097152 nodes
+Mesh ratios: 3.141593 x 3.141593 x 3.141593
+K:           71
+Np:          1
+Steps:       hx = 0.024737, hy = 0.024737, hz = 0.024737
+params:      at = 0.779697, a^2 = 0.101321
+Straight solution ...
++++++ Timer start +++++
+Iter 10/71
+Iter 20/71
+Iter 30/71
+Iter 40/71
+Iter 50/71
+Iter 60/71
+Iter 70/71
++++++ Time end +++++
+Solution time: 3.502855
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 3.141593
+INPUT Number Of Steps (K): 71
+
+=========== Courant Check ===========
+h_min:       0.024737
+tau_max:     0.044868 (for stability)
+tau:         0.014085 (current)
+Courant num: 0.314 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        128^3 = 2097152 nodes
+Mesh ratios: 3.141593 x 3.141593 x 3.141593
+K:           71
+Np:          1
+Steps:       hx = 0.024737, hy = 0.024737, hz = 0.024737
+params:      at = 0.779697, a^2 = 0.101321
+Straight solution ...
++++++ Timer start +++++
+Iter 10/71
+Iter 20/71
+Iter 30/71
+Iter 40/71
+Iter 50/71
+Iter 60/71
+Iter 70/71
++++++ Time end +++++
+Solution time: 3.501647
+INPUT Mesh Size (N): 127^3
+INPUT Lx = Ly = Lz = 3.141593
+INPUT Number Of Steps (K): 71
+
+=========== Courant Check ===========
+h_min:       0.024737
+tau_max:     0.044868 (for stability)
+tau:         0.014085 (current)
+Courant num: 0.314 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        128^3 = 2097152 nodes
+Mesh ratios: 3.141593 x 3.141593 x 3.141593
+K:           71
+Np:          1
+Steps:       hx = 0.024737, hy = 0.024737, hz = 0.024737
+params:      at = 0.779697, a^2 = 0.101321
+Straight solution ...
++++++ Timer start +++++
+Iter 10/71
+Iter 20/71
+Iter 30/71
+Iter 40/71
+Iter 50/71
+Iter 60/71
+Iter 70/71
++++++ Time end +++++
+Solution time: 3.486025
+n256 naive pi
 INPUT Mesh Size (N): 255^3
-INPUT Lx = Ly = Lz = 1.000000
+INPUT Lx = Ly = Lz = 3.141593
 INPUT Number Of Steps (K): 141
 
 =========== Courant Check ===========
-h_min:       0.003922
-tau_max:     0.007113 (for stability)
+h_min:       0.012320
+tau_max:     0.022346 (for stability)
 tau:         0.007092 (current)
-Courant num: 0.997 (must be < 1.0)
+Courant num: 0.317 (must be < 1.0)
 Stability: OK
 
 =========== Params ===========
 Mesh:        256^3 = 16777216 nodes
-Mesh ratios: 1.000000 x 1.000000 x 1.000000
+Mesh ratios: 3.141593 x 3.141593 x 3.141593
 K:           141
 Np:          1
-Steps:       hx = 0.003922, hy = 0.003922, hz = 0.003922
-params:      at = 2.449490, a^2 = 0.101321
+Steps:       hx = 0.012320, hy = 0.012320, hz = 0.012320
+params:      at = 0.779697, a^2 = 0.101321
 Straight solution ...
 +++++ Timer start +++++
 Iter 10/141
@@ -324,5 +507,148 @@ Iter 120/141
 Iter 130/141
 Iter 140/141
 +++++ Time end +++++
-Solution time: 54.877314
+Solution time: 54.749683
+INPUT Mesh Size (N): 255^3
+INPUT Lx = Ly = Lz = 3.141593
+INPUT Number Of Steps (K): 141
 
+=========== Courant Check ===========
+h_min:       0.012320
+tau_max:     0.022346 (for stability)
+tau:         0.007092 (current)
+Courant num: 0.317 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        256^3 = 16777216 nodes
+Mesh ratios: 3.141593 x 3.141593 x 3.141593
+K:           141
+Np:          1
+Steps:       hx = 0.012320, hy = 0.012320, hz = 0.012320
+params:      at = 0.779697, a^2 = 0.101321
+Straight solution ...
++++++ Timer start +++++
+Iter 10/141
+Iter 20/141
+Iter 30/141
+Iter 40/141
+Iter 50/141
+Iter 60/141
+Iter 70/141
+Iter 80/141
+Iter 90/141
+Iter 100/141
+Iter 110/141
+Iter 120/141
+Iter 130/141
+Iter 140/141
++++++ Time end +++++
+Solution time: 54.728743
+INPUT Mesh Size (N): 255^3
+INPUT Lx = Ly = Lz = 3.141593
+INPUT Number Of Steps (K): 141
+
+=========== Courant Check ===========
+h_min:       0.012320
+tau_max:     0.022346 (for stability)
+tau:         0.007092 (current)
+Courant num: 0.317 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        256^3 = 16777216 nodes
+Mesh ratios: 3.141593 x 3.141593 x 3.141593
+K:           141
+Np:          1
+Steps:       hx = 0.012320, hy = 0.012320, hz = 0.012320
+params:      at = 0.779697, a^2 = 0.101321
+Straight solution ...
++++++ Timer start +++++
+Iter 10/141
+Iter 20/141
+Iter 30/141
+Iter 40/141
+Iter 50/141
+Iter 60/141
+Iter 70/141
+Iter 80/141
+Iter 90/141
+Iter 100/141
+Iter 110/141
+Iter 120/141
+Iter 130/141
+Iter 140/141
++++++ Time end +++++
+Solution time: 54.856830
+INPUT Mesh Size (N): 255^3
+INPUT Lx = Ly = Lz = 3.141593
+INPUT Number Of Steps (K): 141
+
+=========== Courant Check ===========
+h_min:       0.012320
+tau_max:     0.022346 (for stability)
+tau:         0.007092 (current)
+Courant num: 0.317 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        256^3 = 16777216 nodes
+Mesh ratios: 3.141593 x 3.141593 x 3.141593
+K:           141
+Np:          1
+Steps:       hx = 0.012320, hy = 0.012320, hz = 0.012320
+params:      at = 0.779697, a^2 = 0.101321
+Straight solution ...
++++++ Timer start +++++
+Iter 10/141
+Iter 20/141
+Iter 30/141
+Iter 40/141
+Iter 50/141
+Iter 60/141
+Iter 70/141
+Iter 80/141
+Iter 90/141
+Iter 100/141
+Iter 110/141
+Iter 120/141
+Iter 130/141
+Iter 140/141
++++++ Time end +++++
+Solution time: 54.800976
+INPUT Mesh Size (N): 255^3
+INPUT Lx = Ly = Lz = 3.141593
+INPUT Number Of Steps (K): 141
+
+=========== Courant Check ===========
+h_min:       0.012320
+tau_max:     0.022346 (for stability)
+tau:         0.007092 (current)
+Courant num: 0.317 (must be < 1.0)
+Stability: OK
+
+=========== Params ===========
+Mesh:        256^3 = 16777216 nodes
+Mesh ratios: 3.141593 x 3.141593 x 3.141593
+K:           141
+Np:          1
+Steps:       hx = 0.012320, hy = 0.012320, hz = 0.012320
+params:      at = 0.779697, a^2 = 0.101321
+Straight solution ...
++++++ Timer start +++++
+Iter 10/141
+Iter 20/141
+Iter 30/141
+Iter 40/141
+Iter 50/141
+Iter 60/141
+Iter 70/141
+Iter 80/141
+Iter 90/141
+Iter 100/141
+Iter 110/141
+Iter 120/141
+Iter 130/141
+Iter 140/141
++++++ Time end +++++
+Solution time: 54.767644
